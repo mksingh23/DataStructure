@@ -51,7 +51,7 @@ bool rootToNodePath(TreeNode *root, int data,vector<TreeNode>& ans){
     return res;
 }
 
-vector<TreeNode*> rootToNode(TreeNode *root, int data){
+vector<TreeNode *> rootToNode(TreeNode *root, int data){
     if(root == nullptr){
         return {};
     }
@@ -72,6 +72,51 @@ vector<TreeNode*> rootToNode(TreeNode *root, int data){
     }
     return {};
 }
+void rootToLeafAllPath(TreeNode *root, vector<TreeNode *>& smallAns, vector<vector<TreeNode *>>&ans){
+    if(root == nullptr){
+        return;
+    }
+    if(root->left == nullptr && root->right == nullptr){
+        smallAns.push_back(root);
+        ans.push_back(smallAns);
+        smallAns.pop_back(root); 
+    }
+    smallAns.push_back(root);
+    rootToLeafAllPath(root.left,smallAns,ans);
+    rootToLeafAllPath(root.right,smallAns,ans);
+    smallAns.pop_back(root);
+
+}
+
+void exactlyOneChild(TreeNode *root, vector<TreeNode *>ans){
+    if(root == nullptr || (root->left == nullptr && root->right == nullptr)){
+        return;
+    }
+    ir(root->left == nullptr || root->right == nullptr){
+        ans.push_back(root);
+        return;
+    }
+
+    exactlyOneChild(root->left,ans);
+    exactlyOneChild(root->right, ans);
+
+}
+
+int countExactlyOneChild(TreeNode *root){
+    if(root == nullptr || (root->left == nullptr && root->right == nullptr)){
+        return 0;
+    }
+
+    int countSingleChildLeft = countExactlyOneChild(root->left);
+    int countSingleChildright = countExactlyOneChild(root->right);
+
+    int ans = countSingleChildLeft + countSingleChildright;
+    if(root->left == null || root->right == null){
+        ans++;
+    }
+    return ans;
+}
+
 int main(){
 
 }

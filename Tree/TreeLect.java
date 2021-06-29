@@ -107,7 +107,45 @@ public class TreeLect{
         return;
     }
 
-    
+    public static void exactlyOneChild(TreeNode root, ArrayList<TreeNode>ans){
+        if(root == null || (root.left == null && root.right == null)){
+            return;
+        }
+        if(root.left == null || root.right == null){
+            ans.add(root);
+        }
+
+        exactlyOneChild(root.left, ans);
+        exactlyOneChild(root.right, ans);
+    }
+
+    public static int countExactlyOneChild(TreeNode root){
+        if(root == null || (root.left == null && root.right == null)){
+            return 0;
+        }
+
+        int countSingleChildLeft = countExactlyOneChild(root.left);
+        int countSingleChildright = countExactlyOneChild(root.right);
+
+        int ans = countSingleChildLeft + countSingleChildright;
+        if(root.left == null || root.right == null){
+            ans++;
+        }
+        return ans;
+    }
+
+    public static void kDown(TreeNode root, int k, TreeNode block, ArrayList<TreeNode> ans){
+        if(root == null || k < 0 || root == block){
+            return;
+        }
+
+        if(k == 0){
+            ans.add(root);
+            return;
+        }
+        kDown(root.left, k - 1, block, ans);
+        kDown(root.right, k - 1, block, ans);
+    }
     public static void main(String[] args) {
          
     }
