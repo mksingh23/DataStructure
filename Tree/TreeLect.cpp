@@ -50,6 +50,28 @@ bool rootToNodePath(TreeNode *root, int data,vector<TreeNode>& ans){
     }
     return res;
 }
+
+vector<TreeNode*> rootToNode(TreeNode *root, int data){
+    if(root == nullptr){
+        return {};
+    }
+    if(root->val == data){
+        return {root};
+    }
+
+    vector<TreeNode *> left = rootToNode(root->left, data);
+    if(left.size() != 0){
+        left.push_back(root);
+        return left;
+    }
+
+    vector<TreeNode *> right = rootToNode(root->right,data);
+    if(right.size() != 0){
+        right.push_back(root);
+        return right;
+    }
+    return {};
+}
 int main(){
 
 }

@@ -70,6 +70,42 @@ public class TreeLect{
         }
         return res;
     }
+
+    public static ArrayList<TreeNode> rootToNode(TreeNode root, int data){
+        if(root == null){
+            return new ArrayList<>();
+        }
+        if(root.val == data){
+            ArrayList<TreeNode> bans = new ArrayList<>();
+        }
+        ArrayList<TreeNode> left = rootToNode(root.left, data);
+        if(left.size() != 0){
+            left.add(root);
+            return left;
+        }
+        ArrayList<TreeNode> right = rootToNode(root.right, data);
+        if(right.size() != 0){
+            right.add(root);
+            return right;
+        }
+        return new ArrayList<>();
+    }
+
+    public static void rootToAllLeafPath(TreeNode root, ArrayList<TreeNode>smallAns,ArrayList<ArrayList<TreeNode>>ans){
+        if(root == null){
+            return;
+        }
+        if(root.left == null && root.right == null){
+            ArrayList<TreeNode> bans = new ArrayList<>(smallAns);
+            bans.add(root);
+            ans.add(bans);
+        }
+        smallAns.add(root);
+        rootToAllLeafPath(root.left, smallAns, ans);
+        rootToAllLeafPath(root.right, smallAns, ans);
+        smallAns.remove(root);
+        return;
+    }
     public static void main(String[] args) {
          
     }
