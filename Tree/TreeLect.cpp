@@ -35,6 +35,21 @@ bool find(TreeNode *root, int data){
     }
     return find(root->left) || find(root.right);
 }
+
+bool rootToNodePath(TreeNode *root, int data,vector<TreeNode>& ans){
+    if(root == nullptr){
+        return false;
+    }
+    if(root.val == data){
+        ans.push_back(root);
+        return true;
+    }
+    bool res = rootToNodePath(root->left,data,ans) || rootToNodePath(root->right, data,ans);
+    if(res){
+        ans.push_back(root);
+    }
+    return res;
+}
 int main(){
 
 }
