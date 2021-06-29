@@ -103,9 +103,11 @@ public class TreeLect{
         smallAns.add(root);
         rootToAllLeafPath(root.left, smallAns, ans);
         rootToAllLeafPath(root.right, smallAns, ans);
-        smallAns.remove(root);
+        smallAns.remove(smallAns.size() - 1);
         return;
     }
+
+    
     public static void main(String[] args) {
          
     }
